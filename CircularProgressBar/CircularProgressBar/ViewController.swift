@@ -17,18 +17,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //make Instanse of VCircularProgressBar
+        obj = VCircularProgressBar.init(self.view, radius: 100)
+        obj.ProgressColor = UIColor.black
+        obj.ProgrssWidth = 10.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.loadViewCustom), userInfo: nil, repeats: true)
-        
-        //make Instanse of VCircularProgressBar
-        obj = VCircularProgressBar.init(self.view, radius: 100)
-        obj.ProgressColor = UIColor.black
-        obj.ProgrssWidth = 20.0
     }
     
     @objc func loadViewCustom() {
@@ -42,7 +39,12 @@ class ViewController: UIViewController {
             i = 0
         }
     }
-
+    
+    
+    @IBAction func StartDownload(_ sender: UIButton) {
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.loadViewCustom), userInfo: nil, repeats: true)
+    }
+    
  
 
     override func didReceiveMemoryWarning() {

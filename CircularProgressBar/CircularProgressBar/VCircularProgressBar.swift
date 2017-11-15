@@ -15,7 +15,11 @@ class VCircularProgressBar {
     private var viewCustom = UIView()
     private var array = [[CGFloat:CGFloat]]()
     private var ProgrssCircleRadius = CGFloat()
-    
+    let Startlbl = UILabel()
+    let Endlbl = UILabel()
+    var lastProgress = 1
+    let path3 = UIBezierPath()
+    let shapeLayer3 = CAShapeLayer()
     convenience init(_ addIntoView:UIView,radius:CGFloat) {
         self.init()
         ProgrssCircleRadius = radius
@@ -27,7 +31,7 @@ class VCircularProgressBar {
     
     func MakeProgressBar(ProgressPercentage:Int) -> Void {
         
-        let Startlbl = UILabel()
+        
         Startlbl.frame = CGRect.init(x: 0, y: 0, width: ProgrssWidth, height:ProgrssWidth)
         Startlbl.layer.cornerRadius = Startlbl.frame.width/2
         Startlbl.layer.masksToBounds = true
@@ -35,34 +39,52 @@ class VCircularProgressBar {
         Startlbl.center = CGPoint.init(x: Array(array[0].keys)[0], y: Array(array[0].values)[0])
         viewCustom.addSubview(Startlbl)
         
+        
+        if ProgressPercentage == 0{
+            ReloadView()
+        }
         let ProgressBarProgress = (ProgressPercentage * 359)/100
         
         if ProgressPercentage > 1 {
-            for i in 1...ProgressBarProgress {
-                let xpos = Array(array[i-1].keys)[0]
-                let ypos = Array(array[i-1].values)[0]
-                
-                let xpos1 = Array(array[i].keys)[0]
-                let ypos1 = Array(array[i].values)[0]
-                
-                let path3 = UIBezierPath()
-                path3.move(to: CGPoint.init(x: xpos, y: ypos))
-                path3.addLine(to:CGPoint.init(x: xpos1, y:ypos1))
-                let shapeLayer3 = CAShapeLayer()
-                shapeLayer3.path = path3.cgPath
-                shapeLayer3.strokeColor = ProgressColor.cgColor
-                shapeLayer3.lineWidth = ProgrssWidth
-                viewCustom.layer.addSublayer(shapeLayer3)
-            }
+            DispatchQueue.main.async(execute: {
+                for i in self.lastProgress...ProgressBarProgress {
+                    let xpos = Array(self.array[i-1].keys)[0]
+                    let ypos = Array(self.array[i-1].values)[0]
+                    
+                    let xpos1 = Array(self.array[i].keys)[0]
+                    let ypos1 = Array(self.array[i].values)[0]
+                    
+                    
+                    self.path3.move(to: CGPoint.init(x: xpos, y: ypos))
+                    self.path3.addLine(to:CGPoint.init(x: xpos1, y:ypos1))
+                    
+                    self.shapeLayer3.path = self.path3.cgPath
+                    self.shapeLayer3.strokeColor = self.ProgressColor.cgColor
+                    self.shapeLayer3.lineWidth = self.ProgrssWidth
+                    self.viewCustom.layer.addSublayer(self.shapeLayer3)
+                    if i == ProgressBarProgress
+                    {
+                        self.lastProgress = ProgressBarProgress
+                    }
+                }
+            })
         }
         
-        let Endlbl = UILabel()
+        
         Endlbl.frame = CGRect.init(x: 0, y: 0, width: ProgrssWidth, height:ProgrssWidth)
         Endlbl.layer.cornerRadius = Endlbl.frame.width/2
         Endlbl.layer.masksToBounds = true
         Endlbl.backgroundColor = ProgressColor
         Endlbl.center = CGPoint.init(x: Array(array[ProgressBarProgress].keys)[0], y: Array(array[ProgressBarProgress].values)[0])
         viewCustom.addSubview(Endlbl)
+    }
+    
+    private func ReloadView() {
+        self.Startlbl.removeFromSuperview()
+        self.Endlbl.removeFromSuperview()
+        shapeLayer3.removeFromSuperlayer()
+        path3.removeAllPoints()
+        lastProgress = 1
     }
     
     
@@ -137,6 +159,7 @@ class VCircularProgressBar {
         }
         return arr
     }
+    
     
     private func BubbleAsceSort(array : [CGFloat:CGFloat]) -> [[CGFloat:CGFloat]] {
         var sortedArray = Array(array.keys)

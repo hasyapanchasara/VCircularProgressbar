@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     var obj = VCircularProgressBar()
     @IBOutlet weak var lblPercentage: UILabel!
     
+    @IBOutlet weak var btnDownload: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
         obj = VCircularProgressBar.init(self.view, radius: 100)
         obj.ProgressColor = UIColor.black
         obj.ProgrssWidth = 10.0
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,14 +38,26 @@ class ViewController: UIViewController {
             i += 1
         }else{
             timer.invalidate()
+            btnDownload.setTitle("Start Download", for: .normal)
+            btnDownload.tag = 0
             i = 0
         }
     }
     
     
     @IBAction func StartDownload(_ sender: UIButton) {
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.loadViewCustom), userInfo: nil, repeats: true)
-    }
+        
+        if sender.tag == 0{
+            sender.tag = 1
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.loadViewCustom), userInfo: nil, repeats: true)
+            sender.setTitle("Stop Download", for: .normal)
+        }else{
+            sender.tag = 0
+            sender.setTitle("Start Download", for: .normal)
+            timer.invalidate()
+            i = 0
+        }
+     }
     
  
 

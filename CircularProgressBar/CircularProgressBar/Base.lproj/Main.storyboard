@@ -28,11 +28,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCv-fP-2RF">
-                                <rect key="frame" x="103.5" y="627" width="167" height="30"/>
+                                <rect key="frame" x="87" y="627" width="200" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Ble-3e-BgY"/>
-                                    <constraint firstAttribute="width" constant="167" id="iqi-FA-bOt"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="iqi-FA-bOt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Start Download">
@@ -53,6 +53,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="btnDownload" destination="bCv-fP-2RF" id="cjU-RO-yvP"/>
                         <outlet property="lblPercentage" destination="HlP-Qh-EZk" id="lrn-rt-pCp"/>
                     </connections>
                 </viewController>

@@ -1,3 +1,3 @@
 # VCircularProgressbar
 
-<a href="https://github.com/vishalkalola1/DemoBasic/blob/master/ReadMe.gif"><img src="https://github.com/vishalkalola1/DemoBasic/blob/master/ReadMe.gif" title=""/></a>
+<a href="https://github.com/vishalkalola1/VCircularProgressbar/blob/master/Progress.gif"><img src="https://github.com/vishalkalola1/VCircularProgressbar/blob/master/Progress.gif" title=""/></a>

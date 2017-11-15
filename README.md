@@ -7,7 +7,7 @@ iOS 8+
 ARC
 
 # Basic usage
-**drag and drop the VCircularProgressBar.swift Class to your project.**
+## drag and drop the VCircularProgressBar.swift Class to your project. ##
 
 **Make instance of VCircularProgressBar**
 

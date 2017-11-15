@@ -18,7 +18,7 @@ obj.ProgrssWidth = 10.0
 ```
 **call this method every percentage and set the percentage into parameter**
 ```
-obj.MakeProgressBar(ProgressPercentage: i)
+obj.MakeProgressBar(ProgressPercentage: 50)
 ```
 
 
